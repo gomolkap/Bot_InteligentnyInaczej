@@ -1,0 +1,33 @@
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Lab</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, serif;
+    }
+
+    h1 {
+      color: #0B3954;
+    }
+
+  </style>
+</head>
+<body>
+<script>
+
+  function readValues(){
+    const isChecked = document.getElementById("myCheckbox").checked;
+    if (isChecked) {
+      alert(document.getElementById("myTextField").value);
+    }
+  }
+
+</script>
+<input type="text" id="myTextField">
+<button type="button" onclick="readValues()">Wyślij wiadomość do bota</button>
+
+</body>
+</html>
