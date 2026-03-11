@@ -31,6 +31,16 @@
   </style>
 </head>
 <body>
+
+<h2>Chat z botem nieinteligentnym</h2>
+
+<div id="chat">
+  <div class="bot"><b>Bot:</b> Cześć, jak tam zajęcia z JS?</div>
+</div>
+
+<input type="text" id="myTextField" placeholder="Co tam?" style="width:250px;">
+<button type="button" onclick="readValues()">Wyślij wiadomość do bota</button>
+
 <script>
 
   const chat = document.getElementById("chat");
@@ -65,7 +75,7 @@
 
     const text = userText.toLowerCase();
 
-    if (userText.toLowerCase().includes("Cześć")) return "Cześć, co tam?";
+    if (userText.toLowerCase().includes("cześć")) return "Cześć, co tam?";
     if (userText.toLowerCase().includes("/version")) return "Wersja oprogramowania: v1.2.3";
     if (userText.toLowerCase().includes("/pogoda kraków")) return "W kraków jest 22 stopnie";
 
@@ -78,15 +88,6 @@
     }
   });
 </script>
-
-<h2>Chat z botem nieinteligentnym</h2>
-
-<div id="chat">
-  <div class="bot"><b>Bot:</b> Cześć, jak tam zajęcia z JS?</div>
-</div>
-
-<input type="text" id="myTextField" placeholder="Co tam?" style="width:250px;">
-<button type="button" onclick="readValues()">Wyślij wiadomość do bota</button>
 
 </body>
 </html>
