@@ -5,7 +5,8 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding: 20px;
+      background: #f2f2f2;
       font-family: Arial, serif;
     }
 
@@ -13,20 +14,50 @@
       color: #0B3954;
     }
 
+    #chat {
+      width: 400px;
+      height: 300px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+
+    .user { color: blue; margin: 5px 0; }
+    .botNie { color: red; margin: 5px 0; }
+
   </style>
 </head>
 <body>
 <script>
 
   function readValues(){
-    const isChecked = document.getElementById("myCheckbox").checked;
-    if (isChecked) {
-      alert(document.getElementById("myTextField").value);
-    }
+    const input = document.getElementById("myTextField");
+    const text = input.value
+
+    if (text === "") return;
+
+    chat.innerHTML += `<div class="user"><b>Ja:</b> ${text}</div>`;
+
+    const response = getBotResponse(text);
   }
 
+  function getBotResponse(userText) {
+    if (userText.toLowerCase().includes("Cześć")) return "Cześć, co tam?";
+    if (userText.toLowerCase().includes("/version")) return "Wersja oprogramowania: v1.2.3";
+    if (userText.toLowerCase().includes("/pogoda kraków")) return "W kraków jest 22 stopnie";
+    if (userText.toLowerCase().includes("motyla noga")) return "nie używaj takich słów";
+
+    return "Przykro mi, moje odpowiedzi są ograniczone. Musisz zadawać właściwe pytania (pozdrowienia dla fanów filmu Ja, robot)";
+
 </script>
-<input type="text" id="myTextField">
+
+<h2>Chat z botem nieinteligentnym</h2>
+
+<div id="chat"></div>
+
+<input type="text" id="myTextField" placeholder="Co tam?" style="width:250px;">
 <button type="button" onclick="readValues()">Wyślij wiadomość do bota</button>
 
 </body>
