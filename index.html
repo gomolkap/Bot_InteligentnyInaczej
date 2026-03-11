@@ -25,6 +25,7 @@
     }
 
     .user { color: blue; margin: 5px 0; }
+    .bot { color: green; margin: 5px 0; }
     .botNie { color: red; margin: 5px 0; }
 
   </style>
@@ -32,30 +33,57 @@
 <body>
 <script>
 
+  const chat = document.getElementById("chat");
+
   function readValues(){
     const input = document.getElementById("myTextField");
     const text = input.value
 
     if (text === "") return;
 
+    if (text.toLowerCase().includes("motyla noga")) {
+      alert("Uwaga! Wulgaryzmy są zabronione.");
+      chat.innerHTML += `<div class="botNie"><b>Bot:</b> proszę, nie używaj takich słów</div>`;
+      input.value = "";
+      return;
+    }
+
     chat.innerHTML += `<div class="user"><b>Ja:</b> ${text}</div>`;
 
     const response = getBotResponse(text);
+
+    input.value = "";
+
+    setTimeout(function(){
+      chat.innerHTML += `<div class="bot"><b>Bot:</b> ${response}</div>`;
+      chat.scrollTop = chat.scrollHeight;
+    }, 1000);
+
   }
 
   function getBotResponse(userText) {
+
+    const text = userText.toLowerCase();
+
     if (userText.toLowerCase().includes("Cześć")) return "Cześć, co tam?";
     if (userText.toLowerCase().includes("/version")) return "Wersja oprogramowania: v1.2.3";
     if (userText.toLowerCase().includes("/pogoda kraków")) return "W kraków jest 22 stopnie";
-    if (userText.toLowerCase().includes("motyla noga")) return "nie używaj takich słów";
 
     return "Przykro mi, moje odpowiedzi są ograniczone. Musisz zadawać właściwe pytania (pozdrowienia dla fanów filmu Ja, robot)";
+  }
 
+  document.getElementById("myTextField").addEventListener("keypress", function(e){
+    if (e.key === "Enter") {
+      readValues();
+    }
+  });
 </script>
 
 <h2>Chat z botem nieinteligentnym</h2>
 
-<div id="chat"></div>
+<div id="chat">
+  <div class="bot"><b>Bot:</b> Cześć, jak tam zajęcia z JS?</div>
+</div>
 
 <input type="text" id="myTextField" placeholder="Co tam?" style="width:250px;">
 <button type="button" onclick="readValues()">Wyślij wiadomość do bota</button>
